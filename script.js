@@ -81,6 +81,36 @@ btnLast.innerHTML = "Last";
 
 paginator.append(btnNext,btnLast);
 //----------------------------------buttons Ended------------------------------------//
+//GETTING DATA FROM JSON file
+
+var finalNum;
+var sum = 0;
+function getData(main_val){
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET","https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json");
+    xhr.send();
+    xhr.onload = function(){
+        const dataFile = JSON.parse(xhr.response);
+
+        let fnum = dataFile.length;
+
+        siNoData.innerHTML = dataFile[main_val-1].id;
+        uNameData.innerHTML = dataFile[main_val-1].name;
+        emailData.innerHTML = dataFile[main_val-1].email;
+
+        if(sum === 0){  //getting len of dat for only one time
+            len(fnum);
+            sum++;
+        }
+        
+    }
+}
+getData(1);
+function len(num){
+    finalNum = num;
+}
+
+
 
 //Getting value from button
 let btns = document.querySelectorAll("button");
@@ -98,12 +128,11 @@ let act_val = parseInt(act_btn.textContent);
 for(var b=0; b<btns.length; b++){
 
     btns[b].addEventListener("click",(e) => {
-
         //main value
         main_val = e.target.textContent;
 
         main_val = main_val == "First" ? 1 :
-        main_val == "Last"  ? 100:
+        main_val == "Last"  ? finalNum:
         main_val == "Previous" ? act_val-1 :
         main_val == "Next" ? act_val+1 : 
         parseInt(main_val);
@@ -114,9 +143,9 @@ for(var b=0; b<btns.length; b++){
         }
 
         //setting the page numbers and active class using main_val
-        let num = 9;
+
         let count;
-        if(main_val+9 > 100){
+        if(main_val+9 > finalNum){
             count = main_val;
             for(var j=8; j>=0; j--){
                 pg_btns[j].innerHTML = count;
@@ -161,20 +190,4 @@ function extraBtn(){
 
 //to get a initial data and button manupilation
 extraBtn();
-getData(1);
 //------------------------Pagination-Nav-Bar-Ended-------------------------
-
-//GETTING DATA FROM JSON file
-function getData(main_val){
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET","https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json");
-    xhr.send();
-
-    xhr.onload = function(){
-        const dataFile = JSON.parse(xhr.response);
-        siNoData.innerHTML = dataFile[main_val-1].id;
-        uNameData.innerHTML = dataFile[main_val-1].name;
-        emailData.innerHTML = dataFile[main_val-1].email;
-    }
-}
-
