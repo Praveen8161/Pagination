@@ -87,16 +87,12 @@ let btns = document.querySelectorAll("button");
 
 let pg_btns = document.querySelectorAll(".pg-btn");
 
-let ini_btn = document.querySelector(".btn1");
-let ini_val = parseInt(ini_btn.textContent);
-let lst_btn = document.querySelector(".btn9");
-let lst_val = parseInt(lst_btn.textContent);
 
 let main_val;
-let last_val;
 
 let act_btn = document.querySelector(".active");
 let act_val = parseInt(act_btn.textContent);
+
 
 //------------------Pagination-Nav-Bar-Start----------------------------
 for(var b=0; b<btns.length; b++){
@@ -144,10 +140,8 @@ for(var b=0; b<btns.length; b++){
 //the extraBtn refers to FIRST,LAST,NEXT and PREVIOUS buttons 
 // when there is no next or previous page available
 function extraBtn(){
-
     act_btn = document.querySelector(".active");
     act_val = parseInt(act_btn.textContent);
-
     if(act_val == "1"){
         btnFirst.style.display = "none";
         btnPre.style.display = "none";
