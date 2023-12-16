@@ -5,4 +5,4 @@
 - the Pagination number updated automatically based on the start and end of the pages
 
 ## Chek out the Live Page
-[Click Here](https://praveen8161.github.io/Pagination/)
+[Click Here](https://pagination8161.netlify.app/)
